@@ -26,6 +26,7 @@ async function run() {
 
         try {
           await exec(`sudo wg-quick up ${configPathonlyname}`);
+          await exec(`sudo wg-quick up ${configPath}`);
           console.log('WireGuard iniciado correctamente');
           await exec(`sudo wg show`);
         } 
