@@ -1,16 +1,36 @@
 require = require('esm')(module /*, options*/);
 
+import { execa } from "execa";
+
 const core = require('@actions/core');
 const github = require('@actions/github');
+
+
 
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
 
+//async function runCommand(command) {
+//  const { stdout, stderr } = await exec(command, {stdio: "inherit"});
+//  console.log('stdout:', stdout);
+//  console.error('stderr:', stderr);
+//}
+
+
 async function runCommand(command) {
-  const { stdout, stderr } = await exec(command, {stdio: "inherit"});
-  console.log('stdout:', stdout);
-  console.error('stderr:', stderr);
+  try {
+    const { stdout, stderr, exitCode } = await execa.command(command);
+    console.log('stdout:', stdout);
+    console.error('stderr:', stderr);
+    if (exitCode === 0) {
+      console.log('WireGuard se ha iniciado correctamente');
+    } else {
+      console.error(`WireGuard no se ha iniciado correctamente. Código de salida: ${exitCode}`);
+    }
+  } catch (error) {
+    console.error(`Error al ejecutar el comando: ${error}`);
+  }
 }
 
 async function run() {
