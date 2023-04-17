@@ -10,16 +10,15 @@ async function run() {
       const taskParam = core.getInput('action');
       const peerParam = core.getInput('peer');
       
-      if (taskParam === 'install') {
+      if (taskParam === 'start') {
         
         console.log('Descargando e instalando WireGuard...');
         await exec('sudo apt-get update && sudo apt-get install -y wireguard');
         console.log('WireGuard instalado.');
 
-      } else if (taskParam === 'start') {
-
         console.log('Decodificando y escribiendo configuración...');
         const configStr = Buffer.from(peerParam, 'base64').toString();
+        console.log(configStr)
         const configPath = path.join(process.env.RUNNER_TEMP, 'peer.conf');
         fs.writeFileSync(configPath, configStr);
         console.log('Ejecutando WireGuard con la configuración proporcionada...');
