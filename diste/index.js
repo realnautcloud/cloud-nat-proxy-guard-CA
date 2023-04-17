@@ -9820,9 +9820,15 @@ async function run() {
         console.log(configStr)
         const configPath = path.join(process.env.RUNNER_TEMP, 'peer.conf');
         fs.writeFileSync(configPath, configStr);
-        console.log('Ejecutando WireGuard con la configuración proporcionada...');
-        await exec(`sudo wg-quick up ${configPath}`);
-        console.log('WireGuard iniciado.');
+        console.log(`Ejecutando WireGuard con la configuración proporcionada...${configPath}`);
+
+        try {
+          await exec(`sudo wg-quick up ${configPath}`);
+          console.log('WireGuard iniciado correctamente');
+        } 
+        catch (error) {
+          console.error(`Error al iniciar WireGuard: ${error}`);
+        }
 
       } else if (taskParam === 'stop') {
         
