@@ -43,7 +43,7 @@ async function run() {
       } else if (taskParam === 'stop') {
         
         console.log('Deteniendo WireGuard...');
-        await exec(`sudo wg-quick down$ ${configPath}`);
+        await exec(`sudo wg-quick down ${configPath}`);
         console.log('WireGuard detenido.');
 
       } else {
