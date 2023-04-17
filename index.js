@@ -1,6 +1,6 @@
 require = require('esm')(module /*, options*/);
 
-import { execa } from "execa";
+const execa = require('execa');
 
 const core = require('@actions/core');
 const github = require('@actions/github');
