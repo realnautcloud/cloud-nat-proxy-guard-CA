@@ -3,18 +3,13 @@ require = require('esm')(module /*, options*/);
 const core = require('@actions/core');
 const github = require('@actions/github');
 
+const { exec } = require('@actions/exec');
+
 
 
 const fs = require('fs');
 const path = require('path');
-const { exec } = require('child_process');
-
-async function runCommand(command) {
-  const { stdout, stderr } = await exec(command, {stdio: "inherit"});
-  console.log('stdout:', stdout);
-  console.error('stderr:', stderr);
-}
-
+//const { exec } = require('child_process');
 
 
 async function run() {

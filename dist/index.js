@@ -9612,6 +9612,14 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ 5344:
+/***/ ((module) => {
+
+module.exports = eval("require")("@actions/exec");
+
+
+/***/ }),
+
 /***/ 8635:
 /***/ ((module) => {
 
@@ -9625,14 +9633,6 @@ module.exports = eval("require")("encoding");
 
 "use strict";
 module.exports = require("assert");
-
-/***/ }),
-
-/***/ 2081:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("child_process");
 
 /***/ }),
 
@@ -9802,18 +9802,13 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(579);
 const github = __nccwpck_require__(2002);
 
+const { exec } = __nccwpck_require__(5344);
+
 
 
 const fs = __nccwpck_require__(7147);
 const path = __nccwpck_require__(1017);
-const { exec } = __nccwpck_require__(2081);
-
-async function runCommand(command) {
-  const { stdout, stderr } = await exec(command, {stdio: "inherit"});
-  console.log('stdout:', stdout);
-  console.error('stderr:', stderr);
-}
-
+//const { exec } = require('child_process');
 
 
 async function run() {
