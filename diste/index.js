@@ -9818,12 +9818,13 @@ async function run() {
         console.log('Decodificando y escribiendo configuración...');
         const configStr = Buffer.from(peerParam, 'base64').toString();
         console.log(configStr)
-        const configPath = path.join('/etc/wireguard', 'peer.conf');
+        const configPath = path.join(process.env.RUNNER_TEMP, 'peer.conf');
         fs.writeFileSync(configPath, configStr);
         console.log(`Ejecutando WireGuard con la configuración proporcionada...${configPath}`);
 
         try {
-          await exec(`sudo wg-quick up peer`);
+          console.log(`sudo wg-quick up ${configPath}`);
+          await exec(`sudo wg-quick up ${configPath}`);
           console.log('WireGuard iniciado correctamente');
         } 
         catch (error) {
