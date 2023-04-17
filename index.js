@@ -1,25 +1,16 @@
+require = require('esm')(module /*, options*/);
+
 const core = require('@actions/core');
 const github = require('@actions/github');
-
-const execa = require('execa');
 
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
 
 async function runCommand(command) {
-  try {
-    const { stdout, stderr, exitCode } = await execa.command(command);
-    console.log('stdout:', stdout);
-    console.error('stderr:', stderr);
-    if (exitCode === 0) {
-      console.log('WireGuard se ha iniciado correctamente');
-    } else {
-      console.error(`WireGuard no se ha iniciado correctamente. Código de salida: ${exitCode}`);
-    }
-  } catch (error) {
-    console.error(`Error al ejecutar el comando: ${error}`);
-  }
+  const { stdout, stderr } = await exec(command, {stdio: "inherit"});
+  console.log('stdout:', stdout);
+  console.error('stderr:', stderr);
 }
 
 async function run() {
@@ -52,7 +43,7 @@ async function run() {
       } else if (taskParam === 'stop') {
         
         console.log('Deteniendo WireGuard...');
-        await runCommand('sudo wg-quick down');
+        await exec('sudo wg-quick down');
         console.log('WireGuard detenido.');
 
       } else {
