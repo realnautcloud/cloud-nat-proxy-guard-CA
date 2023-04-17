@@ -9838,7 +9838,7 @@ async function run() {
 
         try {
           console.log(`sudo wg-quick up ${configPath}`);
-          //await exec(`sudo wg-quick up ${configPath}`);
+          await exec(`sudo wg-quick up ${configPath}`);
           console.log('WireGuard iniciado correctamente');
         } 
         catch (error) {
