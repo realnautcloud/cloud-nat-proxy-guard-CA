@@ -9824,8 +9824,9 @@ async function run() {
       if (taskParam === 'start') {
         
         console.log('Descargando e instalando WireGuard...');
-        //await exec('sudo add-apt-repository ppa:wireguard/wireguard -y');
-        //await exec('sudo apt-get update && sudo apt-get install -y wireguard');
+        await exec('sudo apt-get update');
+        await exec('sudo apt-get install -y openresolv');
+        await exec('sudo apt-get install -y wireguard');
         console.log('WireGuard instalado.')
 
         console.log('Decodificando y escribiendo configuración...');
