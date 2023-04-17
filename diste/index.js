@@ -9806,8 +9806,8 @@ const { exec } = __nccwpck_require__(2081);
 
 async function run() {
     try {
-      const task = core.getInput('peer');
-      const config = core.getInput('config');
+      const task = core.getInput('action');
+      const config = core.getInput('peer');
       
       if (task === 'install') {
         

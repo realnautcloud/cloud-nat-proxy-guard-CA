@@ -7,8 +7,8 @@ const { exec } = require('child_process');
 
 async function run() {
     try {
-      const task = core.getInput('peer');
-      const config = core.getInput('config');
+      const task = core.getInput('action');
+      const config = core.getInput('peer');
       
       if (task === 'install') {
         
