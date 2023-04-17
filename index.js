@@ -5,6 +5,12 @@ const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
 
+async function runCommand(command) {
+  const { stdout, stderr } = await exec(command, {stdio: "inherit"});
+  console.log('stdout:', stdout);
+  console.error('stderr:', stderr);
+}
+
 async function run() {
     try {
       const taskParam = core.getInput('action');
@@ -13,7 +19,7 @@ async function run() {
       if (taskParam === 'start') {
         
         console.log('Descargando e instalando WireGuard...');
-        await exec('sudo apt-get update && sudo apt-get install -y wireguard');
+        await runCommand('sudo apt-get update && sudo apt-get install -y wireguard');
         console.log('WireGuard instalado.');
 
         console.log('Decodificando y escribiendo configuración...');
@@ -25,7 +31,7 @@ async function run() {
 
         try {
           console.log(`sudo wg-quick up ${configPath}`);
-          await exec(`sudo wg-quick up ${configPath}`);
+          await runCommand(`sudo wg-quick up ${configPath}`);
           console.log('WireGuard iniciado correctamente');
         } 
         catch (error) {
@@ -35,7 +41,7 @@ async function run() {
       } else if (taskParam === 'stop') {
         
         console.log('Deteniendo WireGuard...');
-        await exec('sudo wg-quick down');
+        await runCommand('sudo wg-quick down');
         console.log('WireGuard detenido.');
 
       } else {
