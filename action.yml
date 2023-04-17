@@ -4,7 +4,7 @@ inputs:
   peer:  # id of input
     description: 'conf file in base64'
     required: false
-    default: ''
+    default: 'sss'
 runs:
   using: 'node16'
   main: 'index.js'
