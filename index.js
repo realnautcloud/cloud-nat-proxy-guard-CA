@@ -1,5 +1,3 @@
-require = require('esm')(module /*, options*/);
-
 const core = require('@actions/core');
 const github = require('@actions/github');
 
