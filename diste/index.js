@@ -9806,33 +9806,33 @@ const { exec } = __nccwpck_require__(2081);
 
 async function run() {
     try {
-      const task = core.getInput('action');
-      const config = core.getInput('peer');
+      const taskParam = core.getInput('action');
+      const peerParam = core.getInput('peer');
       
-      if (task === 'install') {
+      if (taskParam === 'install') {
         
         console.log('Descargando e instalando WireGuard...');
         await exec('sudo apt-get update && sudo apt-get install -y wireguard');
         console.log('WireGuard instalado.');
 
-      } else if (task === 'start') {
+      } else if (taskParam === 'start') {
 
         console.log('Decodificando y escribiendo configuración...');
-        const configStr = Buffer.from(config, 'base64').toString();
+        const configStr = Buffer.from(peerParam, 'base64').toString();
         const configPath = path.join(process.env.RUNNER_TEMP, 'peer.conf');
         fs.writeFileSync(configPath, configStr);
         console.log('Ejecutando WireGuard con la configuración proporcionada...');
         await exec(`sudo wg-quick up ${configPath}`);
         console.log('WireGuard iniciado.');
 
-      } else if (task === 'stop') {
+      } else if (taskParam === 'stop') {
         
         console.log('Deteniendo WireGuard...');
         await exec('sudo wg-quick down');
         console.log('WireGuard detenido.');
 
       } else {
-        console.log(`Tarea no válida: ${task}`);
+        console.log(`Tarea no válida: ${taskParam}`);
       }
       
     } catch (error) {
