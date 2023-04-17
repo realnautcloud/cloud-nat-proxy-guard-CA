@@ -24,7 +24,7 @@ async function run() {
         
         console.log('Descargando e instalando WireGuard...');
         await exec('sudo apt-get update');
-        //await exec('sudo apt-get install -y openresolv');
+        await exec('sudo apt-get install -y openresolv');
         //await exec('sudo apt-get install -y resolvconf');
         await exec('sudo apt-get install -y wireguard');
         console.log('WireGuard instalado.')
