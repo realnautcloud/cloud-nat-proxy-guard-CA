@@ -19,14 +19,8 @@ async function run() {
         console.log('Decodificando y escribiendo configuración...');
         const configStr = Buffer.from(peerParam, 'base64').toString();
         console.log(configStr)
-        const configPath = '/etc/wireguard/peer.conf';
-        fs.writeFile(configPath, configStr, (err) => {
-          if (err) {
-            console.error(`Error al escribir archivo de configuración: ${err}`);
-          } else {
-            console.log(`Archivo de configuración creado en ${configPath}`);
-          }
-        });
+        const configPath = path.join('/etc/wireguard', 'peer.conf');
+        fs.writeFileSync(configPath, configStr);
         console.log(`Ejecutando WireGuard con la configuración proporcionada...${configPath}`);
 
         try {
