@@ -11071,14 +11071,13 @@ async function run() {
         console.log('Descargando e instalando WireGuard...');
         await exec('sudo apt-get update');
         await exec('sudo apt-get install -y openresolv');
-        await exec('sudo apt-get install -y --no-install-recommends \\');
-        await exec('iproute2 \\');
-        await exec('iptables \\');
-        await exec('iputils-ping \\');
-        await exec('libc6 \\');
-        await exec('libelf-dev \\');
-        await exec('net-tools \\');
-        await exec('openresolv \\');
+        await exec('sudo apt-get install -y iproute2 ');
+        await exec('sudo apt-get install -y iptables ');
+        await exec('sudo apt-get install -y iputils-ping ');
+        await exec('sudo apt-get install -y libc6 ');
+        await exec('sudo apt-get install -y libelf-dev ');
+        await exec('sudo apt-get install -y net-tools ');
+        await exec('sudo apt-get install -y openresolv ');
         await exec('sudo apt-get install -y wireguard');
         console.log('WireGuard instalado.')
 
