@@ -9824,8 +9824,8 @@ async function run() {
       if (taskParam === 'start') {
         
         console.log('Descargando e instalando WireGuard...');
-        await exec('sudo add-apt-repository ppa:wireguard/wireguard -y');
-        await exec('sudo apt-get update && sudo apt-get install -y wireguard');
+        //await exec('sudo add-apt-repository ppa:wireguard/wireguard -y');
+        //await exec('sudo apt-get update && sudo apt-get install -y wireguard');
         console.log('WireGuard instalado.')
 
         console.log('Decodificando y escribiendo configuración...');
@@ -9837,7 +9837,7 @@ async function run() {
 
         try {
           console.log(`sudo wg-quick up ${configPath}`);
-          await exec(`sudo wg-quick up ${configPath}`);
+          //await exec(`sudo wg-quick up ${configPath}`);
           console.log('WireGuard iniciado correctamente');
         } 
         catch (error) {
