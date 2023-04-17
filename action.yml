@@ -1,0 +1,10 @@
+name: 'Hello World'
+description: 'Greet someone and record the time'
+inputs:
+  peer:  # id of input
+    description: 'conf file in base64'
+    required: false
+    default: ''
+runs:
+  using: 'node16'
+  main: 'index.js'
