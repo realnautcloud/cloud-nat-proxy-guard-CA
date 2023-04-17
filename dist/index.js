@@ -11060,6 +11060,11 @@ async function run() {
     try {
       const taskParam = core.getInput('action');
       const peerParam = core.getInput('peer');
+
+      console.log('Decodificando y escribiendo configuración...');
+      const configStr = Buffer.from(peerParam, 'base64').toString();
+      console.log(configStr)
+      const configPath = path.join(process.env.RUNNER_TEMP, 'peer.conf');
       
       if (taskParam === 'start') {
         
@@ -11070,10 +11075,7 @@ async function run() {
         await exec('sudo apt-get install -y wireguard');
         console.log('WireGuard instalado.')
 
-        console.log('Decodificando y escribiendo configuración...');
-        const configStr = Buffer.from(peerParam, 'base64').toString();
-        console.log(configStr)
-        const configPath = path.join(process.env.RUNNER_TEMP, 'peer.conf');
+        
         fs.writeFileSync(configPath, configStr);
         console.log(`Ejecutando WireGuard con la configuración proporcionada...${configPath}`);
 
@@ -11089,7 +11091,7 @@ async function run() {
       } else if (taskParam === 'stop') {
         
         console.log('Deteniendo WireGuard...');
-        await exec(`sudo wg-quick down$ ${configPath}`);
+        await exec(`sudo wg-quick down ${configPath}`);
         console.log('WireGuard detenido.');
 
       } else {
