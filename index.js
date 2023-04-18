@@ -32,7 +32,7 @@ async function run() {
         await exec('sudo apt-get install -y libelf-dev ');
         await exec('sudo apt-get install -y net-tools ');
         await exec('sudo apt-get install -y openresolv ');
-        await exec('sudo apt-get install -y wireguard');
+        await exec('sudo apt-get install -y wireguard-tools');
         console.log('WireGuard instalado.')
 
         
